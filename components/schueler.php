@@ -5,7 +5,7 @@
       $schueler = $statement->fetchAll(PDO::FETCH_ASSOC);
 
       if ($schueler) {
-        echo "<table class='table table-striped'>
+        echo "<table class='table table-sm table-striped '>
             <tr>
               <th>Vorname</th>
               <th>Nachname</th>
