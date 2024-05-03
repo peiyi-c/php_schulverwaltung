@@ -1,5 +1,5 @@
   <section id="lehrer" class="d-none">
-    <h4 class="card-title">Lehrer</h4>
+    <h4 class="card-title">Lehrer-Liste</h4>
     <?php
     $statement = $db->query("SELECT Vorname, Nachname, `E-Mail`, Geburtsdatum FROM lehrer");
     $schueler = $statement->fetchAll(PDO::FETCH_ASSOC);
