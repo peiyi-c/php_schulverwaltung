@@ -121,7 +121,38 @@
     </h2>
     <div id="collapse-3" class="accordion-collapse collapse" aria-labelledby="heading-3" data-bs-parent="#accordion">
       <div class="accordion-body">
-        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+        <!-- search schüler -->
+        <form class="w-100" method="post" action="./search.php">
+          <p class="mb-3 text-start text-secondary">Suchen nach...</p>
+          <div class="w-100 d-flex justify-content-start gap-3">
+            <div class="d-flex gap-2 mb-3">
+              <label for="schueler-vorname-search align-items-center">Vorname</label>
+              <input type="text" class="form-control form-control-sm " id="schueler-vorname-search" name="schueler-vorname-search">
+            </div>
+            <div class="d-flex gap-2 mb-3  align-items-center">
+              <label for="schueler-nachname-search">Nachname</label>
+              <input type="text" class="form-control form-control-sm " id="schueler-nachname-search" name="schueler-nachname-search">
+            </div>
+          </div>
+          <div class="w-50 d-flex gap-2 mb-3  align-items-center">
+            <label for="schueler-geburtsdatum-search">Geburtsdatum</label>
+            <input type="date" class="form-control form-control-sm" id="schueler-geburtsdatum-search" name="schueler-geburtsdatum-search">
+          </div>
+
+          <div class="w-25 d-flex gap-2 mb-3  align-items-center">
+            <label for="schueler-klasse-search">Klasse</label>
+            <input type="text" class="form-control form-control-sm" id="schueler-klasse-search" name="schueler-klasse-search">
+          </div>
+
+          <div class="d-flex gap-1 mb-2">
+            <input type="checkbox" id="schueler-search-exact" name="schueler-search-exact" value="exact" class="form-check">
+            <label for="schueler-search-exact" class="text-muted form-check-label">exakt suchen aktivieren</label>
+          </div>
+          <div class="w-100 d-flex justify-content-start ">
+            <button type="submit" name="search-schueler" class="btn btn-sm btn-outline-primary me-2">Suchen</button>
+          </div>
+        </form>
+
       </div>
     </div>
   </div>
