@@ -10,27 +10,27 @@
         <!-- add schüler form -->
         <form class="w-100" method="post" action="./insert.php">
           <p class="mb-3 text-start text-secondary">Bitte füllen Sie die folgenden Daten aus</p>
-          <div class="w-100 d-flex justify-content-start align-items-center  gap-3">
+          <div class="w-100 d-flex justify-content-start gap-3">
             <div class="d-flex gap-2 mb-3">
-              <label for="schueler-vorname justify-content-center" class="form-label">Vorname</label>
+              <label for="schueler-vorname align-items-center">Vorname</label>
               <input type="text" class="form-control form-control-sm " id="schueler-vorname" name="schueler-vorname" required>
             </div>
-            <div class="d-flex gap-2 mb-3">
-              <label for="schueler-nachname justify-content-center" class="form-label">Nachname</label>
+            <div class="d-flex gap-2 mb-3  align-items-center">
+              <label for="schueler-nachname">Nachname</label>
               <input type="text" class="form-control form-control-sm " id="schueler-nachname" name="schueler-nachname" required>
             </div>
           </div>
-          <div class="w-75 d-flex gap-2 mb-3">
-            <label for="schueler-email justify-content-center" class="form-label text-nowrap ">E-Mail</label>
-            <input type="email" class="form-control form-control-sm " id="schueler-email" name="schueler-email" value="NULL">
+          <div class="w-75 d-flex gap-2 mb-3  align-items-center">
+            <label for="schueler-email " class="text-nowrap  align-items-center">E-Mail</label>
+            <input type="email" class="form-control form-control-sm " id="schueler-email" name="schueler-email">
           </div>
-          <div class="w-50 d-flex gap-2 mb-3">
-            <label for="schueler-geburtsdatum justify-content-center" class="form-label">Geburtsdatum</label>
+          <div class="w-50 d-flex gap-2 mb-3  align-items-center">
+            <label for="schueler-geburtsdatum">Geburtsdatum</label>
             <input type="date" class="form-control form-control-sm" placeholder="YYYY-MM-DD" id="schueler-geburtsdatum" name="schueler-geburtsdatum">
           </div>
 
-          <div class="w-25 d-flex gap-2 mb-3">
-            <label for="schueler-klasse justify-content-center" class="form-label">Klasse</label>
+          <div class="w-25 d-flex gap-2 mb-3  align-items-center">
+            <label for="schueler-klasse">Klasse</label>
             <input type="text" class="form-control form-control-sm" placeholder="A10" id="schueler-klasse" name="schueler-klasse" required>
           </div>
           <div class="w-100 d-flex justify-content-start ">
@@ -110,8 +110,6 @@
             </div>
           </div>
         </form>
-
-
       </div>
     </div>
   </div>
