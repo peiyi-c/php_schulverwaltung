@@ -1,4 +1,4 @@
-.active {
-  color: darkblue !important;
+.nav-link.active {
+  color: #edaa19 !important;
   font-weight: 600 !important;
 }
