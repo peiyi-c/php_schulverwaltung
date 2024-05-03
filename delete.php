@@ -6,18 +6,28 @@ $db = connect();
 // message alert status
 $alert = '';
 
-// add schueler 
-if (isset($_POST["insert-schueler"])) {
-  $vorname = $_POST["schueler-vorname"];
-  $nachname = $_POST["schueler-nachname"];
-  $email = $_POST["schueler-email"];
-  $geburtsdatum = $_POST["schueler-geburtsdatum"];
-  $klasse = $_POST["schueler-klasse"];
+// delete schueler by names
+if (isset($_POST["delete-schueler"]) && $_POST['delete-schueler-namen'] !== 'default') {
+  $schuelerId = $_POST["delete-schueler-namen"];
 
   try {
-    $query = "INSERT INTO schueler VALUES (?,?,?,?,?,?)";
+    $query = "DELETE FROM schueler WHERE Schüler_ID = :id";
     $statement = $db->prepare($query);
-    $statement->execute([0, $vorname, $nachname, $email, $geburtsdatum, $klasse]);
+    $statement->execute(['id' => $schuelerId]);
+    $alert = 'success';
+  } catch (PDOException $e) {
+    die("Operation fehlgeschlagen: " . $e->getMessage());
+    $alert = 'warning';
+  };
+}
+// delete schueler by email
+if (isset($_POST["delete-schueler"]) && $_POST['delete-schueler-email'] !== 'default') {
+  $schuelerId = $_POST["delete-schueler-email"];
+
+  try {
+    $query = "DELETE FROM schueler WHERE Schüler_ID = :id";
+    $statement = $db->prepare($query);
+    $statement->execute(['id' => $schuelerId]);
     $alert = 'success';
   } catch (PDOException $e) {
     die("Operation fehlgeschlagen: " . $e->getMessage());
@@ -53,7 +63,7 @@ if (isset($_POST["insert-schueler"])) {
         <?php
         switch ($alert) {
           case 'success':
-            echo '<div class="alert alert-success w-75 mx-auto" role="alert">Hinzugefügt!</div>';
+            echo '<div class="alert alert-success w-75 mx-auto" role="alert">Gelöscht!</div>';
             break;
           case 'warning':
             echo '<div class="alert alert-warning w-75 mx-auto" role="alert">Fehlgeschlagen...</div>';
@@ -63,7 +73,7 @@ if (isset($_POST["insert-schueler"])) {
         }
         ?>
         <!-- back to index.php -->
-        <button class="btn btn-lg btn-primary"> <a href="./index.php" class=" text-decoration-none text-white">Zurück zum HomePage</a></button>
+        <button class="btn btn-lg btn-primary"> <a href="./index.php" class=" text-decoration-none text-white">Zurück zum Dashboard</a></button>
 
 
       </div>
