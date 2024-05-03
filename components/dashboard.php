@@ -1,3 +1,4 @@
         <section id="dashboard">
-          <?php include "accordion.php" ?>
+          <p class="fs-5 text-start text-primary fw-bold ">Schüler</p>
+          <?php include "accordion_schueler.php" ?>
         </section>
