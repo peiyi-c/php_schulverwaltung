@@ -22,16 +22,17 @@ $db = connect();
     <div class="card text-center">
       <div class="card-header">
         <!-- navitation -->
-        <?php include "./navigation.php" ?>
+        <?php include "./components/navigation.php" ?>
 
       </div>
       <div class="card-body">
         <section id="dashboard">
           <h4 class="card-title my-5">Willkommen zur Schulverwaltungssystem!</h4>
         </section>
-        <?php include "./lehrer.php" ?>
-        <?php include "./schueler.php" ?>
-        <?php include "./kurs.php" ?>
+        <!-- sections -->
+        <?php include "./components/lehrer.php" ?>
+        <?php include "./components/schueler.php" ?>
+        <?php include "./components/kurs.php" ?>
 
       </div>
     </div>
