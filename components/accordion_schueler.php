@@ -1,46 +1,49 @@
 <div class="accordion" id="accordion">
   <div class="accordion-item">
     <h2 class="accordion-header" id="heading-1">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
-        Hinzufügen
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1">
+        Suchen
       </button>
     </h2>
-    <div id="collapse-1" class="accordion-collapse collapse show" aria-labelledby="heading-1" data-bs-parent="#accordion">
+    <div id="collapse-1" class="accordion-collapse collapse" aria-labelledby="heading-1" data-bs-parent="#accordion">
       <div class="accordion-body">
-        <!-- add schüler form -->
-        <form class="w-100" method="post" action="./insert.php">
-          <p class="mb-3 text-start text-secondary">Bitte füllen Sie die folgenden Daten aus</p>
+        <!-- search schüler -->
+        <form class="w-100" method="post" action="./search.php">
+          <p class="mb-3 text-start text-secondary">Suchen nach...</p>
           <div class="w-100 d-flex justify-content-start gap-3">
-            <div class="d-flex gap-2 mb-3">
-              <label for="schueler-vorname align-items-center">Vorname</label>
-              <input type="text" class="form-control form-control-sm " id="schueler-vorname" name="schueler-vorname" required>
+            <div class="d-flex gap-2 mb-3 align-items-center">
+              <label for="schueler-vorname-search align-items-center">Vorname</label>
+              <input type="text" class="form-control form-control-sm " id="schueler-vorname-search" name="schueler-vorname-search">
             </div>
             <div class="d-flex gap-2 mb-3  align-items-center">
-              <label for="schueler-nachname">Nachname</label>
-              <input type="text" class="form-control form-control-sm " id="schueler-nachname" name="schueler-nachname" required>
+              <label for="schueler-nachname-search">Nachname</label>
+              <input type="text" class="form-control form-control-sm " id="schueler-nachname-search" name="schueler-nachname-search">
             </div>
           </div>
-          <div class="w-75 d-flex gap-2 mb-3  align-items-center">
-            <label for="schueler-email " class="text-nowrap  align-items-center">E-Mail</label>
-            <input type="email" class="form-control form-control-sm " id="schueler-email" name="schueler-email">
-          </div>
-          <div class="w-50 d-flex gap-2 mb-3  align-items-center">
-            <label for="schueler-geburtsdatum">Geburtsdatum</label>
-            <input type="date" class="form-control form-control-sm" placeholder="YYYY-MM-DD" id="schueler-geburtsdatum" name="schueler-geburtsdatum">
-          </div>
+          <div class="w-100 d-flex justify-content-start gap-3">
+            <div class="w-25 d-flex gap-2 mb-3  align-items-center">
+              <label for="schueler-geburtsdatum-search text-nowrap" class="text-nowrap">Ab Alter</label>
+              <input type="number" class="form-control form-control-sm" id="schueler-geburtsdatum-search" name="schueler-geburtsdatum-search">
+            </div>
 
-          <div class="w-25 d-flex gap-2 mb-3  align-items-center">
-            <label for="schueler-klasse">Klasse</label>
-            <input type="text" class="form-control form-control-sm" placeholder="A10" id="schueler-klasse" name="schueler-klasse" required>
+            <div class="w-25 d-flex gap-2 mb-3  align-items-center">
+              <label for="schueler-klasse-search">Klasse</label>
+              <input type="text" class="form-control form-control-sm" id="schueler-klasse-search" name="schueler-klasse-search">
+            </div>
           </div>
+          <!-- <div class="d-flex gap-1 mb-2">
+            <input type="checkbox" id="schueler-search-exact" name="schueler-search-exact" value="exact" class="form-check">
+            <label for="schueler-search-exact" class="text-muted form-check-label">exakt suchen aktivieren</label>
+          </div> -->
           <div class="w-100 d-flex justify-content-start ">
-            <button type="submit" name="insert-schueler" class="btn btn-sm btn-outline-primary ">Hinzufügen</button>
+            <button type="submit" name="search-schueler" class="btn btn-sm btn-outline-primary me-2">Suchen</button>
           </div>
-
         </form>
+
       </div>
     </div>
   </div>
+
   <div class="accordion-item">
     <h2 class="accordion-header" id="heading-2">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
@@ -48,15 +51,17 @@
       </button>
     </h2>
     <div id="collapse-2" class="accordion-collapse collapse" aria-labelledby="heading-2" data-bs-parent="#accordion">
-      <div class="accordion-body">
+      <div class="accordion-body row">
         <!-- delete schüler form -->
-        <form class="w-75 mb-3 " method="post" action="./delete.php">
+        <form class="mb-3 col-11 col-md-6" method="post" action="./delete.php">
           <div class="w-100 d-flex justify-content-start align-items-center  gap-3">
             <?php
             $statement = $db->query("SELECT * FROM schueler");
             $schueler = $statement->fetchAll(PDO::FETCH_ASSOC);
             if ($schueler) {
-              echo "<label for='delete-schueler-namen'>Namen</label> <select class='form-select' name='delete-schueler-namen' id='delete-schueler-namen'> <option value='default'> --- </option>";
+              echo "<label for='delete-schueler-namen'>Namen</label> 
+              <select class='form-select' name='delete-schueler-namen' id='delete-schueler-namen'> 
+              <option value='default'> --- </option>";
               foreach ($schueler as $result) {
                 $id = $result['Schüler_ID'];
                 echo "<option value='$id'>" . $result['Vorname'] . " " . $result['Nachname'] . '</option>';
@@ -71,7 +76,7 @@
           </div>
         </form>
         <hr />
-        <form class="w-75 mb-3 " method="post" action="./delete.php">
+        <form class="mb-3 col-11 col-md-6" method="post" action="./delete.php">
           <div class="w-100 d-flex justify-content-start align-items-center  gap-3">
             <?php
             if ($schueler) {
@@ -90,7 +95,7 @@
           </div>
         </form>
         <hr />
-        <form class="w-50 mb-3 " method="post" action="./delete.php">
+        <form class="mb-3 col-11 col-md-6" method="post" action="./delete.php">
           <div class="w-100 d-flex justify-content-start align-items-center  gap-3">
             <?php
             $statement = $db->query("SELECT DISTINCT(Klasse) FROM `schueler` ORDER BY Klasse");
@@ -113,47 +118,48 @@
       </div>
     </div>
   </div>
-  <div class="accordion-item">
+
+  <div class="accordion-item ">
     <h2 class="accordion-header" id="heading-3">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
-        Suchen
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#collapse-3" aria-controls="collapse-3">
+        Hinzufügen
       </button>
     </h2>
-    <div id="collapse-3" class="accordion-collapse collapse" aria-labelledby="heading-3" data-bs-parent="#accordion">
+    <div id="collapse-3" class="accordion-collapse collapse" aria-labelledby="heading-3" aria-expanded="false" data-bs-parent="#accordion">
       <div class="accordion-body">
-        <!-- search schüler -->
-        <form class="w-100" method="post" action="./search.php">
-          <p class="mb-3 text-start text-secondary">Suchen nach...</p>
+        <!-- add schüler form -->
+        <form class="w-100" method="post" action="./insert.php">
+          <p class="mb-3 text-start text-secondary">Bitte füllen Sie die folgenden Daten aus</p>
           <div class="w-100 d-flex justify-content-start gap-3">
             <div class="d-flex gap-2 mb-3">
-              <label for="schueler-vorname-search align-items-center">Vorname</label>
-              <input type="text" class="form-control form-control-sm " id="schueler-vorname-search" name="schueler-vorname-search">
+              <label for="schueler-vorname align-items-center">Vorname</label>
+              <input type="text" class="form-control form-control-sm " id="schueler-vorname" name="schueler-vorname" required>
             </div>
             <div class="d-flex gap-2 mb-3  align-items-center">
-              <label for="schueler-nachname-search">Nachname</label>
-              <input type="text" class="form-control form-control-sm " id="schueler-nachname-search" name="schueler-nachname-search">
+              <label for="schueler-nachname">Nachname</label>
+              <input type="text" class="form-control form-control-sm " id="schueler-nachname" name="schueler-nachname" required>
             </div>
           </div>
-          <div class="w-50 d-flex gap-2 mb-3  align-items-center">
-            <label for="schueler-geburtsdatum-search">Geburtsdatum</label>
-            <input type="date" class="form-control form-control-sm" id="schueler-geburtsdatum-search" name="schueler-geburtsdatum-search">
+          <div class="w-75 d-flex gap-2 mb-3 align-items-center">
+            <label for="schueler-email " class="text-nowrap  align-items-center">E-Mail</label>
+            <input type="email" class="form-control form-control-sm " id="schueler-email" name="schueler-email">
+          </div>
+          <div class="w-75 d-flex gap-2 mb-3 align-items-center">
+            <label for="schueler-geburtsdatum">Geburtsdatum</label>
+            <input type="date" class="form-control form-control-sm" placeholder="YYYY-MM-DD" id="schueler-geburtsdatum" name="schueler-geburtsdatum">
           </div>
 
-          <div class="w-25 d-flex gap-2 mb-3  align-items-center">
-            <label for="schueler-klasse-search">Klasse</label>
-            <input type="text" class="form-control form-control-sm" id="schueler-klasse-search" name="schueler-klasse-search">
-          </div>
-
-          <div class="d-flex gap-1 mb-2">
-            <input type="checkbox" id="schueler-search-exact" name="schueler-search-exact" value="exact" class="form-check">
-            <label for="schueler-search-exact" class="text-muted form-check-label">exakt suchen aktivieren</label>
+          <div class="w-25 d-flex gap-2 mb-3 align-items-center">
+            <label for="schueler-klasse">Klasse</label>
+            <input type="text" class="form-control form-control-sm" placeholder="A10" id="schueler-klasse" name="schueler-klasse" required>
           </div>
           <div class="w-100 d-flex justify-content-start ">
-            <button type="submit" name="search-schueler" class="btn btn-sm btn-outline-primary me-2">Suchen</button>
+            <button type="submit" name="insert-schueler" class="btn btn-sm btn-outline-primary ">Hinzufügen</button>
           </div>
-        </form>
 
+        </form>
       </div>
     </div>
   </div>
+
 </div>
