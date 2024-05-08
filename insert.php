@@ -42,10 +42,13 @@ if (isset($_POST["insert-schueler"])) {
 
 <body class="my-5 container-fluid bg-light-subtle ">
   <main class="">
-    <h1 class="my-5 text-center ">Schulverwaltung - Operationzentum</h1>
+    <h1 class="my-5 text-center ">Schulverwaltung - Hinzufügen</h1>
     <div class="card text-center">
       <div class="card-header">
-
+        <div class="d-flex w-100 justify-content-start">
+          <!-- back to index.php -->
+          <button class="btn btn-primary "> <a href="./index.php" class=" text-decoration-none text-light">Zurück</a></button>
+        </div>
       </div>
       <div class="card-body">
 
@@ -53,7 +56,8 @@ if (isset($_POST["insert-schueler"])) {
         <?php
         switch ($alert) {
           case 'success':
-            echo '<div class="alert alert-success w-75 mx-auto" role="alert">Hinzugefügt!</div>';
+            echo '<div class="alert alert-success w-75 mx-auto" role="alert">' .
+              $vorname . ' ' . $nachname . ' in die Klasse ' . $klasse  . ' Hinzugefügt!</div>';
             break;
           case 'warning':
             echo '<div class="alert alert-warning w-75 mx-auto" role="alert">Fehlgeschlagen...</div>';
@@ -62,9 +66,6 @@ if (isset($_POST["insert-schueler"])) {
             echo '<div class="alert alert-info w-75 mx-auto" role="alert">Nichts zu bearbeiten</div>';
         }
         ?>
-        <!-- back to index.php -->
-        <button class="btn btn-lg btn-primary"> <a href="./index.php" class=" text-decoration-none text-white">Zurück zum HomePage</a></button>
-
 
       </div>
 
