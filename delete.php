@@ -13,7 +13,7 @@ $alert = '';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Schulverwaltung - Operationzentum</title>
+  <title>Schulverwaltung - Löschung</title>
   <!-- css -->
   <link rel="stylesheet" href="./style.css">
   <!-- Bootstrap -->
@@ -23,7 +23,7 @@ $alert = '';
 
 <body class="my-5 container-fluid bg-light-subtle ">
   <main class="">
-    <h1 class="my-5 text-center ">Schulverwaltung - Löschen</h1>
+    <h1 class="my-5 text-center ">Schulverwaltung - Ergebnis</h1>
     <div class="card text-center">
       <div class="card-header">
         <div class="d-flex w-100 justify-content-start">
