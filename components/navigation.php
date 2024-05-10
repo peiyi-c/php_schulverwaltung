@@ -4,15 +4,15 @@
            <button class="nav-link text-secondary active" data-type="dashboard">Dashboard</button>
          </li>
          <li class="nav-item">
-           <button class="nav-link text-secondary" data-type="lehrer">Lehrer</button>
+           <button class="nav-link text-secondary" data-type="lehrer">Lehrer-Übersicht</button>
          </li>
 
          <li class="nav-item">
-           <button class="nav-link text-secondary" data-type="schueler">Schüler</button>
+           <button class="nav-link text-secondary" data-type="schueler">Schüler-Übersicht</button>
          </li>
 
          <li class="nav-item">
-           <button class="nav-link text-secondary" data-type="kurs">Kurs</button>
+           <button class="nav-link text-secondary" data-type="kurs">Kurs-Übersicht</button>
          </li>
        </ul>
      </nav>
