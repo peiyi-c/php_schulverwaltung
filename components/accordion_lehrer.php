@@ -36,9 +36,36 @@
       </button>
     </h2>
     <div id="collapse-lehrer-2" class="accordion-collapse collapse" aria-labelledby="heading-lehrer-2" data-bs-parent="#accordion-lehrer">
-      <div class="accordion-body">
+      <div class="accordion-body row">
         <!-- delete lehrer form -->
-
+        <form class="mb-3 col-11 col-md-" method="post" action="./delete.php">
+          <div class="w-50 d-flex justify-content-start align-items-center gap-3">
+            <?php
+            $statement = $db->query("SELECT * FROM lehrer");
+            $lehrer = $statement->fetchAll(PDO::FETCH_ASSOC);
+            if ($lehrer) {
+              echo "<label for='delete-lehrer-id'>Namen</label> 
+              <select class='form-select' name='delete-lehrer-id' id='delete-lehrer-id'> 
+              <option value='default'> --- </option>";
+              foreach ($lehrer as $result) {
+                $id = $result['Lehrer_ID'];
+                echo "<option value='$id'>" . $result['Vorname'] . " " . $result['Nachname'] . '</option>';
+              }
+              echo "</select>";
+            } else {
+              echo "<span>Keine Namen gefunden..</span>";
+            } ?>
+          </div>
+          <p class="w-100 mt-3 text-start text-warning">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill mb-1" viewBox="0 0 16 16">
+              <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901" />
+            </svg>
+            Achtung: Wenn vorhanden, werden die Kurse von diesem Lehrer auch gelöscht!
+          </p>
+          <div class="w-100 mt-3 d-flex justify-content-start align-items-center ">
+            <button type="submit" name='delete-lehrer' class="btn btn-sm btn-outline-primary">Löschen</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

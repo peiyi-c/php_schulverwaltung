@@ -1,12 +1,13 @@
   <section id="lehrer" class="d-none container-fluid">
     <h4 class="card-title">Lehrer-Liste</h4>
     <?php
-    $statement = $db->query("SELECT Vorname, Nachname, `E-Mail`, Geburtsdatum FROM lehrer");
+    $statement = $db->query("SELECT * FROM lehrer");
     $lehrer = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     if ($lehrer) {
       echo "<table class='table table-sm table-striped'>
             <tr>
+              <th>Lehrer ID</th>  
               <th>Vorname</th>
               <th>Nachname</th>
               <th>E-Mail</th>
@@ -14,7 +15,7 @@
             
             </tr>";
       foreach ($lehrer as $result) {
-        echo "<tr><td>" . $result['Vorname'] . "</td><td>" . $result['Nachname'] . "</td><td>" . $result['E-Mail'] . "</td><td>" . $result['Geburtsdatum'] . '</td></tr>';
+        echo "<tr><td>"  . $result['Lehrer_ID'] . "</td><td>" . $result['Vorname'] . "</td><td>" . $result['Nachname'] . "</td><td>" . $result['E-Mail'] . "</td><td>" . $result['Geburtsdatum'] . '</td></tr>';
       }
       echo "</table>";
     } else {

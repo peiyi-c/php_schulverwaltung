@@ -32,6 +32,31 @@ $alert = '';
         </div>
       </div>
       <div class="card-body">
+        <!-- delete lehrer -->
+        <?php
+        if (isset($_POST["delete-lehrer"])) {
+          if (($_POST['delete-lehrer-id'] == 'default')) {
+            echo '<div class="alert alert-info w-75 mx-auto" role="alert">Kein Lehrer wurde gelöscht.</div>';
+            return;
+          } else {
+            $lehrerId = $_POST["delete-lehrer-id"];
+            try {
+              $query1 = "DELETE FROM kurs WHERE Lehrer_ID = :lehrerId";
+              $query2 = "DELETE FROM lehrer WHERE Lehrer_ID = :lehrerId";
+              $statement = $db->prepare($query1);
+              $statement->execute(['lehrerId' => $lehrerId]);
+              $statement = $db->prepare($query2);
+              $statement->execute(['lehrerId' => $lehrerId]);
+              $alert = 'success';
+            } catch (PDOException $e) {
+              die("Operation fehlgeschlagen: " . $e->getMessage());
+              $alert = 'warning';
+            }
+          }
+        }
+
+        ?>
+        <!-- delete schüler -->
         <?php
         // if no data entered at all
         if (isset($_POST["delete-schueler"]) && ($_POST['delete-schueler-namen'] == 'default' || $_POST['delete-schueler-email'] == 'default' || $_POST['delete-schueler-klasse'] == 'default')) {
@@ -83,25 +108,43 @@ $alert = '';
           };
         }
 
-        // alert message
-        switch ($alert) {
-          case 'success':
-            echo '<div class="alert alert-success w-75 mx-auto" role="alert">';
-            if ($klasse) {
-              echo 'Klasse ' . $klasse;
-            } elseif ($schuelerIdByEmail) {
-              echo 'Schueler ID ' . $schuelerIdByEmail;
-            } elseif ($schuelerIdByName) {
-              echo 'Schueler ID ' . $schuelerIdByName;
-            }
-            echo ' wurde gelöscht!</div>';
-            break;
-          case 'warning':
-            echo '<div class="alert alert-warning w-75 mx-auto" role="alert">Fehlgeschlagen...</div>';
-            break;
-          default:
-            echo '<div class="alert alert-info w-75 mx-auto" role="alert">Nichts zu bearbeiten</div>';
+        // ========================== alert message ============================ //
+
+        if (isset($_POST["delete-schueler"])) {
+          switch ($alert) {
+            case 'success':
+              echo '<div class="alert alert-success w-75 mx-auto" role="alert">';
+              if ($klasse) {
+                echo 'Klasse ' . $klasse;
+              } elseif ($schuelerIdByEmail) {
+                echo 'Schueler ID ' . $schuelerIdByEmail;
+              } elseif ($schuelerIdByName) {
+                echo 'Schueler ID ' . $schuelerIdByName;
+              }
+              echo ' wurde gelöscht!</div>';
+              break;
+            case 'warning':
+              echo '<div class="alert alert-warning w-75 mx-auto" role="alert">Fehlgeschlagen...</div>';
+              break;
+            default:
+              echo '<div class="alert alert-info w-75 mx-auto" role="alert">Nichts zu bearbeiten</div>';
+          }
         }
+
+        if (isset($_POST["delete-lehrer"])) {
+          switch ($alert) {
+            case 'success':
+              echo '<div class="alert alert-success w-75 mx-auto" role="alert">';
+              echo 'Lehrer ID ' . $lehrerId . ' wurde gelöscht!</div>';
+              break;
+            case 'warning':
+              echo '<div class="alert alert-warning w-75 mx-auto" role="alert">Fehlgeschlagen...</div>';
+              break;
+            default:
+              echo '<div class="alert alert-info w-75 mx-auto" role="alert">Nichts zu bearbeiten</div>';
+          }
+        }
+
         ?>
 
       </div>
