@@ -42,7 +42,9 @@ INSERT INTO lehrer VALUES
 (0,'Felix', 'Hoffmann', 'felix.hoffmann@schule.com', '1983-04-30'),
 (0,'Mia', 'Schäfer', 'mia.schaefer@schule.com', '1991-12-03'),
 (0,'Timo', 'Richter', 'timo.richter@schule.com', '1980-08-08'),
-(0,'Laura', 'Meier', 'laura.meier@schule.com', '1975-01-18');
+(0,'Laura', 'Meier', 'laura.meier@schule.com', '1975-01-18'),
+(0,'Joseph', 'Aoi', 'joseph.aoi@schule.com', '1970-02-10'),
+(0,'Joe', 'Bächerei', 'joe.bäeckerei@schule.com', '1988-02-11')
 
 INSERT INTO schueler (Vorname, Nachname, `E-Mail`, Geburtsdatum, Klasse)
 VALUES 
@@ -91,7 +93,10 @@ VALUES
 ('Sport', '8', 'SS2024', 'Sport und Gesundheit'),
 ('Gesundheitserziehung', '8', 'SS2024', 'Sport und Gesundheit'),
 ('Ethik', '10', 'SS2024', 'Ethik und Religion'),
-('Religion', '10', 'WS2425', 'Ethik und Religion');
+('Religion', '10', 'WS2425', 'Ethik und Religion'),
+('Kochen und Backen', '4', 'SS2024', 'Hauswirtschaft'),
+('Textilarbeit', '6', 'SS2024', 'Hauswirtschaft'),
+('Hauswirtschaftliche Chemie', '7', 'SS2024', 'Hauswirtschaft');
 
 -- 6. Nutze den JOIN-Befehl, um die Daten aus den Tabellen Lehrer und Kurs zu kombinieren und alle Lehrer und ihre Kurse anzuzeigen.
 SELECT * FROM lehrer INNER JOIN kurs ON lehrer.Lehrer_ID = kurs.Lehrer_ID;
