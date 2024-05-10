@@ -5,25 +5,6 @@ $db = connect();
 
 // message alert status
 $alert = '';
-
-// add schueler 
-if (isset($_POST["insert-schueler"])) {
-  $vorname = $_POST["schueler-vorname"];
-  $nachname = $_POST["schueler-nachname"];
-  $email = $_POST["schueler-email"];
-  $geburtsdatum = $_POST["schueler-geburtsdatum"];
-  $klasse = $_POST["schueler-klasse"];
-
-  try {
-    $query = "INSERT INTO schueler VALUES (?,?,?,?,?,?)";
-    $statement = $db->prepare($query);
-    $statement->execute([0, $vorname, $nachname, $email, $geburtsdatum, $klasse]);
-    $alert = 'success';
-  } catch (PDOException $e) {
-    die("Operation fehlgeschlagen: " . $e->getMessage());
-    $alert = 'warning';
-  };
-}
 ?>
 
 <!DOCTYPE html>
@@ -51,9 +32,31 @@ if (isset($_POST["insert-schueler"])) {
         </div>
       </div>
       <div class="card-body">
-
-        <!-- alert message -->
         <?php
+        // add schueler 
+        if (isset($_POST["insert-schueler"])) {
+          $vorname = $_POST["schueler-vorname"];
+          $nachname = $_POST["schueler-nachname"];
+          $email = $_POST["schueler-email"];
+          $geburtsdatum = $_POST["schueler-geburtsdatum"];
+          $klasse = $_POST["schueler-klasse"];
+
+          if (!$vorname || !$nachname || !$geburtsdatum || !$klasse) {
+            echo '<div class="alert alert-info w-75 mx-auto" role="alert">Bitte alle Pflichtfelder eingeben!</div>';
+            return;
+          }
+          try {
+            $query = "INSERT INTO schueler VALUES (?,?,?,?,?,?)";
+            $statement = $db->prepare($query);
+            $statement->execute([0, $vorname, $nachname, $email, $geburtsdatum, $klasse]);
+            $alert = 'success';
+          } catch (PDOException $e) {
+            die("Operation fehlgeschlagen: " . $e->getMessage());
+            $alert = 'warning';
+          };
+        }
+
+        // alert message
         switch ($alert) {
           case 'success':
             echo '<div class="alert alert-success w-75 mx-auto" role="alert">' .
@@ -68,9 +71,7 @@ if (isset($_POST["insert-schueler"])) {
         ?>
 
       </div>
-
     </div>
-
   </main>
 
   <!-- Bootstrap -->

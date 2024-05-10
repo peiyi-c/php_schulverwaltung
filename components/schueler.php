@@ -1,4 +1,4 @@
- <section id="schueler" class="d-none">
+ <section id="schueler" class="d-none container-fluid">
    <h4 class="card-title">Schüler-Liste</h4>
    <?php
     $statement = $db->query("SELECT Vorname, Nachname, `E-Mail`, Geburtsdatum, Klasse FROM schueler");

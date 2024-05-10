@@ -5,51 +5,6 @@ $db = connect();
 
 // message alert status
 $alert = '';
-
-// delete schueler by names
-if (isset($_POST["delete-schueler"]) && $_POST['delete-schueler-namen'] !== 'default') {
-  $schuelerIdByName = $_POST["delete-schueler-namen"];
-
-  try {
-    $query = "DELETE FROM schueler WHERE Schüler_ID = :id";
-    $statement = $db->prepare($query);
-    $statement->execute(['id' => $schuelerIdByName]);
-    $alert = 'success';
-  } catch (PDOException $e) {
-    die("Operation fehlgeschlagen: " . $e->getMessage());
-    $alert = 'warning';
-  };
-}
-
-
-// delete schueler by email
-if (isset($_POST["delete-schueler"]) && $_POST['delete-schueler-email'] !== 'default') {
-  $schuelerIdByEmail = $_POST["delete-schueler-email"];
-
-  try {
-    $query = "DELETE FROM schueler WHERE Schüler_ID = :id";
-    $statement = $db->prepare($query);
-    $statement->execute(['id' => $schuelerIdByEmail]);
-    $alert = 'success';
-  } catch (PDOException $e) {
-    die("Operation fehlgeschlagen: " . $e->getMessage());
-    $alert = 'warning';
-  };
-}
-
-// delete schueler by klasse
-if (isset($_POST["delete-schueler"]) && $_POST['delete-schueler-klasse'] !== 'default') {
-  $klasse = $_POST["delete-schueler-klasse"];
-  try {
-    $query = "DELETE FROM schueler WHERE Klasse = :klasse";
-    $statement = $db->prepare($query);
-    $statement->execute(['klasse' => $klasse]);
-    $alert = 'success';
-  } catch (PDOException $e) {
-    die("Operation fehlgeschlagen: " . $e->getMessage());
-    $alert = 'warning';
-  };
-}
 ?>
 
 <!DOCTYPE html>
@@ -77,9 +32,58 @@ if (isset($_POST["delete-schueler"]) && $_POST['delete-schueler-klasse'] !== 'de
         </div>
       </div>
       <div class="card-body">
-
-        <!-- alert message -->
         <?php
+        // if no data entered at all
+        if (isset($_POST["delete-schueler"]) && ($_POST['delete-schueler-namen'] == 'default' || $_POST['delete-schueler-email'] == 'default' || $_POST['delete-schueler-klasse'] == 'default')) {
+          echo '<div class="alert alert-info w-75 mx-auto" role="alert">Kein Schüler wurde gelöscht.</div>';
+          return;
+        }
+
+        // delete schueler by names
+        if (isset($_POST["delete-schueler"]) && $_POST['delete-schueler-namen'] !== 'default') {
+          $schuelerIdByName = $_POST["delete-schueler-namen"];
+
+          try {
+            $query = "DELETE FROM schueler WHERE Schüler_ID = :id";
+            $statement = $db->prepare($query);
+            $statement->execute(['id' => $schuelerIdByName]);
+            $alert = 'success';
+          } catch (PDOException $e) {
+            die("Operation fehlgeschlagen: " . $e->getMessage());
+            $alert = 'warning';
+          };
+        }
+
+        // delete schueler by email
+        if (isset($_POST["delete-schueler"]) && $_POST['delete-schueler-email'] !== 'default') {
+          $schuelerIdByEmail = $_POST["delete-schueler-email"];
+
+          try {
+            $query = "DELETE FROM schueler WHERE Schüler_ID = :id";
+            $statement = $db->prepare($query);
+            $statement->execute(['id' => $schuelerIdByEmail]);
+            $alert = 'success';
+          } catch (PDOException $e) {
+            die("Operation fehlgeschlagen: " . $e->getMessage());
+            $alert = 'warning';
+          };
+        }
+
+        // delete schueler by klasse
+        if (isset($_POST["delete-schueler"]) && $_POST['delete-schueler-klasse'] !== 'default') {
+          $klasse = $_POST["delete-schueler-klasse"];
+          try {
+            $query = "DELETE FROM schueler WHERE Klasse = :klasse";
+            $statement = $db->prepare($query);
+            $statement->execute(['klasse' => $klasse]);
+            $alert = 'success';
+          } catch (PDOException $e) {
+            die("Operation fehlgeschlagen: " . $e->getMessage());
+            $alert = 'warning';
+          };
+        }
+
+        // alert message
         switch ($alert) {
           case 'success':
             echo '<div class="alert alert-success w-75 mx-auto" role="alert">';

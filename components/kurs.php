@@ -1,4 +1,4 @@
-<section id="kurs" class="d-none">
+<section id="kurs" class="d-none container-fluid">
   <h4 class="card-title">Kursübersicht</h4>
   <?php
   $statement = $db->query("SELECT kurs.Titel, kurs.Semester, lehrer.Vorname, lehrer.Nachname, kurs.Kategorie FROM kurs INNER JOIN lehrer ON kurs.Lehrer_ID = lehrer.Lehrer_ID");
