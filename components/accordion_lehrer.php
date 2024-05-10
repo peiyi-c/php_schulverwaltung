@@ -78,8 +78,28 @@
     </h2>
     <div id="collapse-lehrer-3" class="accordion-collapse collapse" aria-labelledby="heading-lehrer-3" data-bs-parent="#accordion-lehrer">
       <div class="accordion-body">
-        <!-- hünzufügen lehrer form -->
+        <!-- add lehrer form -->
+        <form class="w-100" method="post" action="./insert.php">
+          <p class="mb-3 text-start text-secondary">Bitte füllen Sie die folgenden Daten aus</p>
+          <div class="w-100 d-flex justify-content-start gap-3">
+            <div class="d-flex gap-2 mb-3">
+              <label for="lehrer-vorname align-items-center">Vorname</label>
+              <input type="text" class="form-control form-control-sm " id="lehrer-vorname" name="lehrer-vorname" required>
+            </div>
+            <div class="d-flex gap-2 mb-3  align-items-center">
+              <label for="lehrer-nachname">Nachname</label>
+              <input type="text" class="form-control form-control-sm " id="lehrer-nachname" name="lehrer-nachname" required>
+            </div>
+            <div class="d-flex gap-2 mb-3 align-items-center">
+              <label for="lehrer-geburtsdatum">Geburtsdatum</label>
+              <input type="date" class="form-control form-control-sm" id="lehrer-geburtsdatum" name="lehrer-geburtsdatum">
+            </div>
+          </div>
+          <div class="w-100 d-flex justify-content-start ">
+            <button type="submit" name="insert-lehrer" class="btn btn-sm btn-outline-primary ">Hinzufügen</button>
+          </div>
 
+        </form>
       </div>
     </div>
   </div>

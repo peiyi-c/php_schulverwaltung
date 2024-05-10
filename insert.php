@@ -5,6 +5,18 @@ $db = connect();
 
 // message alert status
 $alert = '';
+
+function replaceUmlaut($string)
+{
+  if ($string) {
+    $string = strtolower($string);
+    $string = str_replace('ü', "ue", $string);
+    $string = str_replace('ä', "ae", $string);
+    $string = str_replace('ö', "oe", $string);
+    $string = str_replace('ß', "ss", $string);
+  }
+  return $string;
+}
 ?>
 
 <!DOCTYPE html>
@@ -33,6 +45,41 @@ $alert = '';
       </div>
       <div class="card-body">
         <?php
+
+        // add lehrer
+        if (isset($_POST["insert-lehrer"])) {
+          $vorname = $_POST["lehrer-vorname"];
+          $nachname = $_POST["lehrer-nachname"];
+          $geburtsdatum = $_POST["lehrer-geburtsdatum"];
+          if (!$vorname || !$nachname || !$geburtsdatum) {
+            echo '<div class="alert alert-info w-75 mx-auto" role="alert">Bitte alle Pflichtfelder eingeben!</div>';
+            return;
+          }
+          try {
+            $email = replaceUmlaut($vorname) . '.' . replaceUmlaut($nachname) . '@schule.com';
+            $query = "INSERT INTO lehrer VALUES (?,?,?,?,?)";
+            $statement = $db->prepare($query);
+            $statement->execute([0, $vorname, $nachname, $email, $geburtsdatum]);
+            $alert = 'success';
+          } catch (PDOException $e) {
+            die("Operation fehlgeschlagen: " . $e->getMessage());
+            $alert = 'warning';
+          };
+
+          // alert message
+          switch ($alert) {
+            case 'success':
+              echo '<div class="alert alert-success w-75 mx-auto" role="alert"> Lehrer ' .
+                $vorname . ' ' . $nachname . ' ergänzt!</div>';
+              break;
+            case 'warning':
+              echo '<div class="alert alert-warning w-75 mx-auto" role="alert">Fehlgeschlagen...</div>';
+              break;
+            default:
+              echo '<div class="alert alert-info w-75 mx-auto" role="alert">Nichts zu bearbeiten</div>';
+          }
+        }
+
         // add schueler 
         if (isset($_POST["insert-schueler"])) {
           $vorname = $_POST["schueler-vorname"];
@@ -54,20 +101,22 @@ $alert = '';
             die("Operation fehlgeschlagen: " . $e->getMessage());
             $alert = 'warning';
           };
+
+          // alert message
+          switch ($alert) {
+            case 'success':
+              echo '<div class="alert alert-success w-75 mx-auto" role="alert">' .
+                $vorname . ' ' . $nachname . ' in die Klasse ' . $klasse  . ' Hinzugefügt!</div>';
+              break;
+            case 'warning':
+              echo '<div class="alert alert-warning w-75 mx-auto" role="alert">Fehlgeschlagen...</div>';
+              break;
+            default:
+              echo '<div class="alert alert-info w-75 mx-auto" role="alert">Nichts zu bearbeiten</div>';
+          }
         }
 
-        // alert message
-        switch ($alert) {
-          case 'success':
-            echo '<div class="alert alert-success w-75 mx-auto" role="alert">' .
-              $vorname . ' ' . $nachname . ' in die Klasse ' . $klasse  . ' Hinzugefügt!</div>';
-            break;
-          case 'warning':
-            echo '<div class="alert alert-warning w-75 mx-auto" role="alert">Fehlgeschlagen...</div>';
-            break;
-          default:
-            echo '<div class="alert alert-info w-75 mx-auto" role="alert">Nichts zu bearbeiten</div>';
-        }
+
         ?>
 
       </div>
