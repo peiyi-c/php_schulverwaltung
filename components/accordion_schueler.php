@@ -1,11 +1,11 @@
-<div class="accordion" id="accordion">
+<div class="accordion" id="accordion-schueler">
   <div class="accordion-item">
-    <h2 class="accordion-header" id="heading-1">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1">
+    <h2 class="accordion-header" id="heading-schueler-1">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-schueler-1" aria-expanded="false" aria-controls="collapse-schueler-1">
         Suchen
       </button>
     </h2>
-    <div id="collapse-1" class="accordion-collapse collapse" aria-labelledby="heading-1" data-bs-parent="#accordion">
+    <div id="collapse-schueler-1" class="accordion-collapse collapse" aria-labelledby="heading-schueler-1" data-bs-parent="#accordion-schueler">
       <div class="accordion-body">
         <!-- search schüler -->
         <form class="w-100" method="post" action="./search.php">
@@ -31,26 +31,21 @@
               <input type="text" class="form-control form-control-sm" id="schueler-klasse-search" name="schueler-klasse-search">
             </div>
           </div>
-          <!-- <div class="d-flex gap-1 mb-2">
-            <input type="checkbox" id="schueler-search-exact" name="schueler-search-exact" value="exact" class="form-check">
-            <label for="schueler-search-exact" class="text-muted form-check-label">exakt suchen aktivieren</label>
-          </div> -->
           <div class="w-100 d-flex justify-content-start ">
             <button type="submit" name="search-schueler" class="btn btn-sm btn-outline-primary me-2">Suchen</button>
           </div>
         </form>
-
       </div>
     </div>
   </div>
 
   <div class="accordion-item">
-    <h2 class="accordion-header" id="heading-2">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
+    <h2 class="accordion-header" id="heading-schueler-2">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-schueler-2" aria-expanded="false" aria-controls="collapse-schueler-2">
         Löschen
       </button>
     </h2>
-    <div id="collapse-2" class="accordion-collapse collapse" aria-labelledby="heading-2" data-bs-parent="#accordion">
+    <div id="collapse-schueler-2" class="accordion-collapse collapse" aria-labelledby="heading-schueler-2" data-bs-parent="#accordion-schueler">
       <div class="accordion-body row">
         <!-- delete schüler form -->
         <form class="mb-3 col-11 col-md-6" method="post" action="./delete.php">
@@ -108,7 +103,7 @@
               }
               echo "</select>";
             } else {
-              echo "<span>Keine E-Mail gefunden..</span>";
+              echo "<span>Keine Klasse gefunden..</span>";
             } ?>
             <div class="me-auto">
               <button type="submit" name='delete-schueler' class="btn btn-sm btn-outline-primary ">Löschen</button>
@@ -119,13 +114,13 @@
     </div>
   </div>
 
-  <div class="accordion-item ">
-    <h2 class="accordion-header" id="heading-3">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#collapse-3" aria-controls="collapse-3">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading-schueler-3">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#collapse-schueler-3" aria-controls="collapse-schueler-3">
         Hinzufügen
       </button>
     </h2>
-    <div id="collapse-3" class="accordion-collapse collapse" aria-labelledby="heading-3" aria-expanded="false" data-bs-parent="#accordion">
+    <div id="collapse-schueler-3" class="accordion-collapse collapse" aria-labelledby="heading-schueler-3" aria-expanded="false" data-bs-parent="#accordion-schueler">
       <div class="accordion-body">
         <!-- add schüler form -->
         <form class="w-100" method="post" action="./insert.php">
