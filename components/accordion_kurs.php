@@ -47,20 +47,6 @@
   </div>
 
   <div class="accordion-item">
-    <h2 class="accordion-header" id="heading-kurs-2">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-kurs-2" aria-expanded="false" aria-controls="collapse-kurs-2">
-        Löschen
-      </button>
-    </h2>
-    <div id="collapse-kurs-2" class="accordion-collapse collapse" aria-labelledby="heading-kurs-2" data-bs-parent="#accordion-kurs">
-      <div class="accordion-body">
-        <!-- delete kurs form -->
-
-      </div>
-    </div>
-  </div>
-
-  <div class="accordion-item">
     <h2 class="accordion-header" id="heading-kurs-3">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-kurs-3" aria-expanded="false" aria-controls="collapse-kurs-3">
         Hinzufügen
