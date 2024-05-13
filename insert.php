@@ -91,6 +91,7 @@ function replaceUmlaut($string)
             echo '<div class="alert alert-info w-75 mx-auto" role="alert">Bitte alle Pflichtfelder eingeben!</div>';
             return;
           }
+
           try {
             $email = 's.' . replaceUmlaut($vorname) . '.' . replaceUmlaut($nachname) . '@schule.com';
             $query = "INSERT INTO schueler VALUES (?,?,?,?,?,?)";
@@ -98,8 +99,9 @@ function replaceUmlaut($string)
             $statement->execute([0, $vorname, $nachname, $email, $geburtsdatum, $klasse]);
             $alert = 'success';
           } catch (PDOException $e) {
-            die("Operation fehlgeschlagen: " . $e->getMessage());
             $alert = 'warning';
+            $warning = $e->getMessage();
+            die("Operation fehlgeschlagen: " . $warning);
           };
 
           // alert message
@@ -108,14 +110,55 @@ function replaceUmlaut($string)
               echo '<div class="alert alert-success w-75 mx-auto" role="alert">' .
                 $vorname . ' ' . $nachname . ' in die Klasse ' . $klasse  . ' Hinzugefügt!</div>';
               break;
+            case 'invalid':
+              echo '<div class="alert alert-info w-75 mx-auto" role="alert">Bitte alle Pflichtfelder eingeben!</div>';
+              break;
             case 'warning':
-              echo '<div class="alert alert-warning w-75 mx-auto" role="alert">Fehlgeschlagen...</div>';
+              echo '<div class="alert alert-warning w-75 mx-auto" role="alert">Fehlgeschlagen...' . $warning . '</div>';
               break;
             default:
               echo '<div class="alert alert-info w-75 mx-auto" role="alert">Nichts zu bearbeiten</div>';
           }
         }
 
+        // add kurs
+        if (isset($_POST["insert-kurs"])) {
+
+          $title = $_POST["insert-kurs-title"];
+          $lehrer = $_POST["insert-kurs-lehrer"];
+          $semester = $_POST["insert-kurs-semester"];
+          $kategorie = $_POST["insert-kurs-kategorie"];
+
+          if (!$title || $lehrer == 'default' || $semester == 'default' || $kategorie == 'default') {
+            echo '<div class="alert alert-info w-75 mx-auto" role="alert">Bitte alle Pflichtfelder eingeben!</div>';
+            return;
+          }
+
+          try {
+            $query = "INSERT INTO kurs VALUES (?,?,?,?,?)";
+            $statement = $db->prepare($query);
+            $statement->execute([0, $title, $lehrer, $semester, $kategorie]);
+            $alert = 'success';
+          } catch (PDOException $e) {
+            $alert = 'warning';
+            $warning = $e->getMessage();
+            exit();
+            die("Operation fehlgeschlagen: " . $warning);
+          };
+
+          // alert message
+          switch ($alert) {
+            case 'success':
+              echo '<div class="alert alert-success w-75 mx-auto" role="alert">Kurs ' .
+                $title . ' Hinzugefügt!</div>';
+              break;
+            case 'warning':
+              echo '<div class="alert alert-warning w-75 mx-auto" role="alert">Fehlgeschlagen...' . $warning . '</div>';
+              break;
+            default:
+              echo '<div class="alert alert-info w-75 mx-auto" role="alert">Nichts zu bearbeiten</div>';
+          }
+        }
 
         ?>
 

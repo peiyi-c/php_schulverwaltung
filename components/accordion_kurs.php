@@ -36,8 +36,6 @@
               <input type="text" class="form-control form-control-sm" id="kurs-lehrernachname-search" name="kurs-lehrernachname-search">
             </div>
           </div>
-
-
           <div class="w-100 d-flex justify-content-start ">
             <button type="submit" name="search-kurs" class="btn btn-sm btn-outline-primary me-2">Suchen</button>
           </div>
@@ -54,8 +52,73 @@
     </h2>
     <div id="collapse-kurs-3" class="accordion-collapse collapse" aria-labelledby="heading-kurs-3" data-bs-parent="#accordion-kurs">
       <div class="accordion-body">
-        <!-- hünzufügen kurs form -->
+        <!-- insert kurs form -->
+        <form class="w-100 row gap-3" method="post" action="./insert.php">
 
+          <p class="col-12 mb-3 text-start text-secondary">Bitte füllen Sie die folgenden Felder aus</p>
+
+          <div class="col-12 d-flex gap-2 align-items-center">
+            <label for="insert-kurs-title align-items-center">Titel</label>
+            <input type="text" class="form-control form-control" id="insert-kurs-title" name="insert-kurs-title" required>
+          </div>
+
+          <div class="col-11 d-flex gap-2 align-items-center">
+            <?php
+            $statement = $db->query("SELECT * FROM lehrer");
+            $lehrer = $statement->fetchAll(PDO::FETCH_ASSOC);
+            if ($lehrer) {
+              echo "<label for='insert-kurs-lehrer' class='text-nowrap'>Lehrer</label> 
+                <select class='form-select' name='insert-kurs-lehrer' id='insert-kurs-lehrer'> 
+                <option value=''> --- </option>";
+              foreach ($lehrer as $result) {
+                $idLehrer = $result['Lehrer_ID'];
+                echo "<option value='$idLehrer'>" . $result['Vorname'] . ' ' . $result['Nachname'] . '</option>';
+              }
+              echo "</select>";
+            } else {
+              echo "<span>Kein Lehrer verfügbar.</span>";
+            } ?>
+          </div>
+
+          <div class="col-5 d-flex gap-2 align-items-center">
+            <?php
+            $statement = $db->query("SELECT DISTINCT(Semester) FROM kurs ORDER BY Semester");
+            $kurs = $statement->fetchAll(PDO::FETCH_ASSOC);
+            if ($kurs) {
+              echo "<label for='insert-kurs-semester' class='text-nowrap'>Semester</label> 
+                <select class='form-select' name='insert-kurs-semester' id='insert-kurs-semester'> 
+                <option value='default'> --- </option>";
+              foreach ($kurs as $result) {
+                echo "<option value=" . $result['Semester'] . ">" . $result['Semester'] . '</option>';
+              }
+              echo "</select>";
+            } else {
+              echo "<span>Es liegt kein Semester vor.</span>";
+            } ?>
+          </div>
+
+          <div class="col-5 d-flex gap-2 align-items-center">
+            <?php
+            $statement = $db->query("SELECT DISTINCT(Kategorie) FROM kurs ORDER BY Kategorie");
+            $kategorie = $statement->fetchAll(PDO::FETCH_ASSOC);
+            if ($kategorie) {
+              echo "<label for='insert-kurs-kategorie' class='text-nowrap'>Kategorie</label> 
+                <select class='form-select' name='insert-kurs-kategorie' id='insert-kurs-kategorie'> 
+                <option value='default'> --- </option>";
+              foreach ($kategorie as $result) {
+                echo "<option value=" . $result['Kategorie'] . ">" . $result['Kategorie'] . '</option>';
+              }
+              echo "</select>";
+            } else {
+              echo "<span>Es liegt kein Semester vor.</span>";
+            } ?>
+          </div>
+
+          <div class="w-100 d-flex justify-content-start ">
+            <button type="submit" name="insert-kurs" class="btn btn-sm btn-outline-primary ">Hinzufügen</button>
+          </div>
+
+        </form>
       </div>
     </div>
   </div>
@@ -92,8 +155,6 @@
             <!-- Lehrer -->
             <div class="col-8 col-lg-6 d-flex justify-content-start align-items-center gap-3">
               <?php
-              $statement = $db->query("SELECT * FROM lehrer");
-              $lehrer = $statement->fetchAll(PDO::FETCH_ASSOC);
               if ($lehrer) {
                 echo "<label for='update-kurs-lehrer' class='text-nowrap'>auf Lehrer</label> 
                 <select class='form-select' name='update-kurs-lehrer' id='update-kurs-lehrer'> 
