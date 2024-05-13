@@ -7,7 +7,7 @@
     if ($schueler) {
       echo "<table class='table table-sm table-striped '>
             <tr>
-              <th>Schüler_ID</th>
+              <th>Schüler ID</th>
               <th>Vorname</th>
               <th>Nachname</th>
               <th>E-Mail</th>
