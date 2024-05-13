@@ -116,7 +116,7 @@
 
   <div class="accordion-item">
     <h2 class="accordion-header" id="heading-schueler-3">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#collapse-schueler-3" aria-controls="collapse-schueler-3">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#collapse-schueler-3" aria-controls="collapse-schueler-3">
         Hinzufügen
       </button>
     </h2>
@@ -137,9 +137,8 @@
           </div>
           <div class="w-75 d-flex gap-2 mb-3 align-items-center">
             <label for="schueler-geburtsdatum">Geburtsdatum</label>
-            <input type="date" class="form-control form-control-sm" placeholder="YYYY-MM-DD" id="schueler-geburtsdatum" name="schueler-geburtsdatum">
+            <input type="date" class="form-control form-control-sm" id="schueler-geburtsdatum" name="schueler-geburtsdatum">
           </div>
-
           <div class="w-25 d-flex gap-2 mb-3 align-items-center">
             <label for="schueler-klasse">Klasse</label>
             <input type="text" class="form-control form-control-sm" placeholder="A10" id="schueler-klasse" name="schueler-klasse" required>
@@ -149,6 +148,50 @@
           </div>
 
         </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading-kurs-4">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-kurs-4" aria-expanded="false" aria-controls="collapse-kurs-4">
+        Ändern
+      </button>
+    </h2>
+    <div id="collapse-kurs-4" class="accordion-collapse collapse" aria-labelledby="heading-kurs-4" data-bs-parent="#accordion-kurs">
+      <div class="accordion-body">
+        <!-- ändern schüler form -->
+        <form action="./update.php" method="post">
+          <div class="row gap-2">
+            <!-- Schüler -->
+            <div class="col-11 col-md-6 d-flex justify-content-start align-items-center gap-3">
+              <?php
+              if ($schueler) {
+                echo "<label for='update-schueler-id' class='text-nowrap'>Schüler</label> 
+                <select class='form-select' name='update-schueler-id' id='update-schueler-id'> 
+                <option value='default'> --- </option>";
+                foreach ($schueler as $result) {
+                  $idSchueler = $result['Schüler_ID'];
+                  echo "<option value='$idSchueler'>" . $result['Vorname'] . ' ' . $result['Nachname'] . ': ' . $result['E-Mail'] . '</option>';
+                }
+                echo "</select>";
+              } else {
+                echo "<span>Keinen Schüler gefunden.</span>";
+              } ?>
+            </div>
+            <!-- new email -->
+            <div class="col-11 col-md-5 d-flex justify-content-start align-items-center gap-3">
+              <label for="update-schueler-email" class="text-nowrap">hat neue E-Mail</label>
+              <input type="email" class="form-control" id="update-schueler-email" name="update-schueler-email" />
+            </div>
+          </div>
+
+          <div class="w-100 d-flex justify-content-start mt-2">
+            <button type="submit" name="update-schueler" class="btn btn-sm btn-outline-primary me-2">Ändern</button>
+          </div>
+
+        </form>
+
       </div>
     </div>
   </div>

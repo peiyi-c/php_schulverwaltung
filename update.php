@@ -5,6 +5,18 @@ $db = connect();
 
 // message alert status
 $alert = '';
+
+function replaceUmlaut($string)
+{
+  if ($string) {
+    $string = strtolower($string);
+    $string = str_replace('ü', "ue", $string);
+    $string = str_replace('ä', "ae", $string);
+    $string = str_replace('ö', "oe", $string);
+    $string = str_replace('ß', "ss", $string);
+  }
+  return $string;
+}
 ?>
 
 <!DOCTYPE html>
@@ -32,8 +44,8 @@ $alert = '';
         </div>
       </div>
       <div class="card-body">
+        <!-- update kurs -->
         <?php
-        // update kurs 
         if (isset($_POST["update-kurs"])) {
 
           $kursId = $_POST["update-kurs-title"];
@@ -53,22 +65,58 @@ $alert = '';
             die("Operation fehlgeschlagen: " . $e->getMessage());
             $alert = 'warning';
           };
-        }
 
-        // alert message
-        switch ($alert) {
-          case 'success':
-            echo '<div class="alert alert-success w-75 mx-auto" role="alert">' .
-              'Lehrer ID ' . $lehrerId . ' betreut nun' . ' Kurs ID ' . $kursId . '!</div>';
-            break;
-          case 'warning':
-            echo '<div class="alert alert-warning w-75 mx-auto" role="alert">Fehlgeschlagen...</div>';
-            break;
-          default:
-            echo '<div class="alert alert-info w-75 mx-auto" role="alert">Nichts zu bearbeiten</div>';
+          // alert message
+          switch ($alert) {
+            case 'success':
+              echo '<div class="alert alert-success w-75 mx-auto" role="alert">' .
+                'Lehrer ID ' . $lehrerId . ' betreut nun' . ' Kurs ID ' . $kursId . '!</div>';
+              break;
+            case 'warning':
+              echo '<div class="alert alert-warning w-75 mx-auto" role="alert">Fehlgeschlagen...</div>';
+              break;
+            default:
+              echo '<div class="alert alert-info w-75 mx-auto" role="alert">Nichts zu bearbeiten</div>';
+          }
         }
         ?>
 
+        <!-- update schueler email -->
+        <?php
+        if (isset($_POST["update-schueler"])) {
+
+          $schuelerId = $_POST["update-schueler-id"];
+          $newEmail = filter_var(replaceUmlaut($_POST["update-schueler-email"]), FILTER_SANITIZE_EMAIL);
+
+          if ($schuelerId == 'default' || !$newEmail) {
+            echo '<div class="alert alert-info w-75 mx-auto" role="alert">Bitte beide Felder ausfüllen!</div>';
+            return;
+          }
+
+          try {
+            $query = "UPDATE schueler SET `E-Mail` = :email WHERE Schüler_ID = :id";
+            $statement = $db->prepare($query);
+            $statement->execute(['email' => $newEmail, 'id' => $schuelerId]);
+            $alert = 'success';
+          } catch (PDOException $e) {
+            die("Operation fehlgeschlagen: " . $e->getMessage());
+            $alert = 'warning';
+          };
+
+          // alert message
+          switch ($alert) {
+            case 'success':
+              echo '<div class="alert alert-success w-75 mx-auto" role="alert">' .
+                'Schüler ID ' . $schuelerId . ' hat nun die E-Mail ' . $newEmail . '!</div>';
+              break;
+            case 'warning':
+              echo '<div class="alert alert-warning w-75 mx-auto" role="alert">Fehlgeschlagen...</div>';
+              break;
+            default:
+              echo '<div class="alert alert-info w-75 mx-auto" role="alert">Nichts zu bearbeiten</div>';
+          }
+        }
+        ?>
       </div>
     </div>
   </main>
