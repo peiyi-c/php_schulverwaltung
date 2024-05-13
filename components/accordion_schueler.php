@@ -136,10 +136,6 @@
             </div>
           </div>
           <div class="w-75 d-flex gap-2 mb-3 align-items-center">
-            <label for="schueler-email " class="text-nowrap  align-items-center">E-Mail</label>
-            <input type="email" class="form-control form-control-sm " id="schueler-email" name="schueler-email">
-          </div>
-          <div class="w-75 d-flex gap-2 mb-3 align-items-center">
             <label for="schueler-geburtsdatum">Geburtsdatum</label>
             <input type="date" class="form-control form-control-sm" placeholder="YYYY-MM-DD" id="schueler-geburtsdatum" name="schueler-geburtsdatum">
           </div>

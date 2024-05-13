@@ -84,7 +84,6 @@ function replaceUmlaut($string)
         if (isset($_POST["insert-schueler"])) {
           $vorname = $_POST["schueler-vorname"];
           $nachname = $_POST["schueler-nachname"];
-          $email = $_POST["schueler-email"];
           $geburtsdatum = $_POST["schueler-geburtsdatum"];
           $klasse = $_POST["schueler-klasse"];
 
@@ -93,6 +92,7 @@ function replaceUmlaut($string)
             return;
           }
           try {
+            $email = 's.' . replaceUmlaut($vorname) . '.' . replaceUmlaut($nachname) . '@schule.com';
             $query = "INSERT INTO schueler VALUES (?,?,?,?,?,?)";
             $statement = $db->prepare($query);
             $statement->execute([0, $vorname, $nachname, $email, $geburtsdatum, $klasse]);
