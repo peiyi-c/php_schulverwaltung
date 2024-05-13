@@ -8,9 +8,9 @@
     <div id="collapse-schueler-1" class="accordion-collapse collapse" aria-labelledby="heading-schueler-1" data-bs-parent="#accordion-schueler">
       <div class="accordion-body">
         <!-- search schüler -->
-        <form class="w-100" method="post" action="./search.php">
+        <form class="w-100 row" method="post" action="./search.php">
           <p class="mb-3 text-start text-secondary">Suchen nach...</p>
-          <div class="w-100 d-flex justify-content-start gap-3">
+          <div class="col-12 col-lg-7 d-flex justify-content-start gap-3">
             <div class="d-flex gap-2 mb-3 align-items-center">
               <label for="schueler-vorname-search align-items-center">Vorname</label>
               <input type="text" class="form-control form-control-sm " id="schueler-vorname-search" name="schueler-vorname-search">
@@ -20,18 +20,17 @@
               <input type="text" class="form-control form-control-sm " id="schueler-nachname-search" name="schueler-nachname-search">
             </div>
           </div>
-          <div class="w-100 d-flex justify-content-start gap-3">
-            <div class="w-25 d-flex gap-2 mb-3  align-items-center">
+          <div class="col-12 col-lg-7 d-flex justify-content-start gap-3">
+            <div class="d-flex gap-2 mb-3  align-items-center">
               <label for="schueler-geburtsdatum-search text-nowrap" class="text-nowrap">Ab Alter</label>
               <input type="number" class="form-control form-control-sm" id="schueler-geburtsdatum-search" name="schueler-geburtsdatum-search">
             </div>
-
-            <div class="w-25 d-flex gap-2 mb-3  align-items-center">
+            <div class="d-flex gap-2 mb-3  align-items-center">
               <label for="schueler-klasse-search">Klasse</label>
               <input type="text" class="form-control form-control-sm" id="schueler-klasse-search" name="schueler-klasse-search">
             </div>
           </div>
-          <div class="w-100 d-flex justify-content-start ">
+          <div class="d-flex justify-content-start ">
             <button type="submit" name="search-schueler" class="btn btn-sm btn-outline-primary me-2">Suchen</button>
           </div>
         </form>
@@ -153,12 +152,12 @@
   </div>
 
   <div class="accordion-item">
-    <h2 class="accordion-header" id="heading-kurs-4">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-kurs-4" aria-expanded="false" aria-controls="collapse-kurs-4">
+    <h2 class="accordion-header" id="heading-schueler-4">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-schueler-4" aria-expanded="false" aria-controls="collapse-schueler-4">
         Ändern
       </button>
     </h2>
-    <div id="collapse-kurs-4" class="accordion-collapse collapse" aria-labelledby="heading-kurs-4" data-bs-parent="#accordion-kurs">
+    <div id="collapse-schueler-4" class="accordion-collapse collapse" aria-labelledby="heading-schueler-4" data-bs-parent="#accordion-schueler">
       <div class="accordion-body">
         <!-- ändern schüler form -->
         <form action="./update.php" method="post">
