@@ -70,7 +70,7 @@
       <div class="accordion-body">
         <!-- aktualisieren kurs form -->
         <form action="./update.php" method="post">
-          <div class="row">
+          <div class="row gap-2">
             <!-- Kurs -->
             <div class="col-8 col-lg-6 d-flex justify-content-start align-items-center gap-3">
               <?php
@@ -90,7 +90,7 @@
               } ?>
             </div>
             <!-- Lehrer -->
-            <div class="col-8 col-lg-6 d-flex justify-content-start align-items-center gap-3 mt-2">
+            <div class="col-8 col-lg-6 d-flex justify-content-start align-items-center gap-3">
               <?php
               $statement = $db->query("SELECT * FROM lehrer");
               $lehrer = $statement->fetchAll(PDO::FETCH_ASSOC);
