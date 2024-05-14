@@ -28,9 +28,9 @@ $db = connect();
       <div class="card-body">
         <!-- sections -->
         <?php include "./components/dashboard.php" ?>
-        <?php include "./components/lehrer.php" ?>
         <?php include "./components/schueler.php" ?>
         <?php include "./components/kurs.php" ?>
+        <?php include "./components/lehrer.php" ?>
       </div>
     </div>
 
