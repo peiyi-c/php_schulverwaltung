@@ -1,7 +1,7 @@
 -- 1. Erstelle eine neue MySQL-Datenbank mit dem Namen "Schulverwaltung".
 CREATE DATABASE schulverwaltung;
-
--- 2. Erstelle die Tabelle Lehrer mit den Spalten Lehrer_ID(Primärschlüssel), Vorname, Nachname, E-Mail und Geburtsdatum.
+-- 2. Erstelle die Tabelle Lehrer mit den Spalten Lehrer_ID(Primärschlüssel), 
+-- Vorname, Nachname, E-Mail und Geburtsdatum.
 CREATE TABLE lehrer (
     Lehrer_ID INT AUTO_INCREMENT PRIMARY KEY,
     Vorname VARCHAR(30) NOT NULL,
@@ -9,7 +9,8 @@ CREATE TABLE lehrer (
     `E-Mail` VARCHAR(50),
     Geburtsdatum DATE
 );
--- 3. Erstelle die Tabelle Schüler mit den Spalten Schüler_ID (Primärschlüssel), Vorname, Nachname, E-Mail, Geburtsdatum und Klasse.
+-- 3. Erstelle die Tabelle Schüler mit den Spalten Schüler_ID 
+-- (Primärschlüssel), Vorname, Nachname, E-Mail, Geburtsdatum und Klasse.
 CREATE TABLE schueler (
     Schüler_ID INT AUTO_INCREMENT PRIMARY KEY,
     Vorname VARCHAR(30) NOT NULL,
@@ -18,7 +19,8 @@ CREATE TABLE schueler (
     Geburtsdatum DATE,
     Klasse VARCHAR(5) NOT NULL
 );
--- 4. Erstelle die Tabelle Kurs mit den Spalten Kurs_ID (Primärschlüssel), Titel, Lehrer_ID (Fremdschlüssel) und Semester.
+-- 4. Erstelle die Tabelle Kurs mit den Spalten Kurs_ID (Primärschlüssel), 
+-- Titel, Lehrer_ID (Fremdschlüssel) und Semester.
 CREATE TABLE kurs (
     Kurs_ID INT AUTO_INCREMENT PRIMARY KEY,
     Titel VARCHAR(100) NOT NULL,
@@ -94,36 +96,44 @@ VALUES
 ('Gesundheitserziehung', '8', 'SS2024', 'Sport und Gesundheit'),
 ('Ethik', '10', 'SS2024', 'Ethik und Religion'),
 ('Religion', '10', 'WS2425', 'Ethik und Religion'),
-('Kochen und Backen', '4', 'SS2024', 'Hauswirtschaft'),
-('Textilarbeit', '6', 'SS2024', 'Hauswirtschaft'),
-('Hauswirtschaftliche Chemie', '7', 'SS2024', 'Hauswirtschaft');
+('Kochen', '1', 'SS2024', 'Hauswirtschaft');
 
--- 6. Nutze den JOIN-Befehl, um die Daten aus den Tabellen Lehrer und Kurs zu kombinieren und alle Lehrer und ihre Kurse anzuzeigen.
+
+-- 6. Nutze den JOIN-Befehl, um die Daten aus den Tabellen Lehrer und Kurs zu 
+-- kombinieren und alle Lehrer und ihre Kurse anzuzeigen.
 SELECT * FROM lehrer INNER JOIN kurs ON lehrer.Lehrer_ID = kurs.Lehrer_ID;
 
--- 7. Nutze den SELECT-Befehl, um alle Schüler aus einer bestimmten Klassenzuzeigen.
+-- 7. Nutze den SELECT-Befehl, um alle Schüler aus einer bestimmten 
+-- Klassenzuzeigen.
 SELECT * FROM schueler WHERE Klasse LIKE '10_'
 
--- 8. Nutze den UPDATE-Befehl, um die E-Mail-Adresse eines Schülers zu aktualisieren.
+-- 8. Nutze den UPDATE-Befehl, um die E-Mail-Adresse eines Schülers zu 
+-- aktualisieren.
 UPDATE schueler SET `E-Mail`='s120@schule.com'
 WHERE Vorname LIKE 'Lisa' AND Nachname LIKE 'Hartmann'
 
--- 9. Nutze den SELECT-Befehl, um alle Kurse und ihre zugehörigen Lehrer anzuzeigen, einschließlich der 
+-- 9. Nutze den SELECT-Befehl, um alle Kurse und ihre zugehörigen Lehrer 
+-- anzuzeigen, einschließlich der 
 -- 10. Lehrer, die derzeit keine Kurse unterrichten.
 SELECT kurs.*, lehrer.Vorname, lehrer.Nachname FROM Kurs
 RIGHT JOIN lehrer ON kurs.Lehrer_ID = lehrer.Lehrer_ID;
 
 -- 11. Nutze den DELETE-Befehl, um alle Schüler aus einer bestimmten Klasse zu 
 -- löschen.
+DELETE FROM schueler WHERE Klasse = 'H12';
 
 -- 12. Nutze den SELECT-Befehl, um alle Kurse anzuzeigen, 
 -- die in einem bestimmten Semester stattfinden.
 SELECT * FROM kurs WHERE Semester LIKE 'WS%';
 
 -- 13. Nutze den UPDATE-Befehl, um den Lehrer eines Kurses zu aktualisieren.
+UPDATE kurs SET Lehrer_ID = 1 WHERE Kurs_ID = 2
 
 -- 14. Nutze den SELECT-Befehl, um alle Schüler anzuzeigen, die älter als 16 
 -- Jahre sind.
+SELECT * FROM schueler WHERE (ADDDATE(Geburtsdatum, INTERVAL 16 YEAR) < CURRENT_DATE())
 
 -- 15. Nutze den DELETE-Befehl, um einen Lehrer und alle seine Kurse zu löschen.
+DELETE FROM kurs WHERE Lehrer_ID = 1;
+DELETE FROM lehrer WHERE Lehrer_ID = 1;
 
