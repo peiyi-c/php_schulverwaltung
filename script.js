@@ -21,7 +21,6 @@ function handleNavClick() {
       this.classList.add("active");
       // set show data type
       show = item.dataset.type;
-      console.log("show:", show);
     }
   });
   checkSection();
